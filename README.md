@@ -31,15 +31,30 @@ pip install -r requirements.txt
 ## Как запустить
 
 ```bash
-python server.py
+python main.py [-l logging level] [-d delay] [-f photos_path]
+```
+Для вызова справки по аргументам комманной строки
+
+```bash
+python main.py -h
 ```
 
-Сервер запустится на порту 8080, чтобы проверить его работу перейдите в браузере на страницу [http://127.0.0.1:8080/](http://127.0.0.1:8080/).
+## Переменные окружения
+
+* DELAY *(задержка в секундах при отправке ответа клиенту)*
+* LOG_LEVEL *(DEBUG / INFO / WARNING / CRITICAL / ERROR)*
+* PHOTOS_PATH *(относительный путь до архива с фотографиями)*
+* SERVICE_PORT
+
+**НАСТРОЙКИ GUNICORN**
+* THREADS *(количество потоков для gunicorn)*
+* TIMEOUT *(Workers silent for more than this many seconds are killed and restarted)*
 
 ## Как развернуть на сервере
 
 ```bash
-python server.py
+$ chmod +x run_app.sh
+$ ./run_app.sh
 ```
 
 После этого перенаправить на микросервис запросы, начинающиеся с `/archive/`. Например:
