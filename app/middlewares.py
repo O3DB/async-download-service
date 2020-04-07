@@ -2,8 +2,9 @@ from aiohttp import web
 from app.utils.logger import get_logger
 
 
-logger = get_logger()
-# todo разбирать запрос в начале (путь и писать лог)
+logger = get_logger(__name__)
+
+
 async def handle_400(request, msg=None):
     return web.json_response({'error': 'Bad request', 'message': msg}, status=400)
 

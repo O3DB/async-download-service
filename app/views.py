@@ -9,7 +9,7 @@ from app.utils.helpers import path_exists
 from app.settings import CONFIG
 
 
-logger = get_logger()
+logger = get_logger(__name__)
 
 
 @path_exists('archive_hash')

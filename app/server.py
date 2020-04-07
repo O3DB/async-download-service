@@ -5,13 +5,14 @@ from app.settings import CONFIG
 from app.routes import setup_routes
 from app.middlewares import setup_middlewares
 from app.utils.logger import get_logger
+from app.utils.logger import get_logger, setup_logging
 
 
 logger = get_logger(__name__)
 
 
 async def init_app():
-    print('INIT APP')
+    setup_logging()
     app = web.Application()
     app['config'] = CONFIG()
     setup_routes(app)
@@ -19,10 +20,10 @@ async def init_app():
     return app
 
 
-def run_app():
-    print('RUN APP')
+def run_app(host=None, port=None):
+    port = port or CONFIG.SERVICE_PORT
     app = init_app()
-    web.run_app(app, host='127.0.0.1', port=CONFIG.SERVICE_PORT)
+    web.run_app(app, host=host, port=port)
 
 
 if __name__ == '__main__':
