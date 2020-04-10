@@ -25,7 +25,7 @@ async def send_archive(resp, archive_hash):
             await resp.write(archive_chunk)
             await asyncio.sleep(CONFIG.DELAY)
         logger.info('Archive {} was sent'.format(archive_hash))
-    except (asyncio.CancelledError):
+    except asyncio.CancelledError:
         logger.info('Download was interrupted')
         proc.terminate()
         raise
