@@ -10,7 +10,7 @@ def setup_logging(level=None, prefix=None, format=None):
     logging.basicConfig(level=level, format=format)
 
 
-def stdout_handler(level=None):
+def get_stdout_handler(level=None):
     handler = logging.StreamHandler(sys.stdout)
     fmt = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
     handler.setFormatter(logging.Formatter(fmt))
@@ -22,7 +22,7 @@ def stdout_handler(level=None):
 def get_logger(name=None, level=None):
     logger = logging.getLogger(name)
     if not logger.handlers:
-        handler = stdout_handler()
+        handler = get_stdout_handler()
         logger.addHandler(handler)
     return logger
 
