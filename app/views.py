@@ -5,16 +5,16 @@ import aiofiles
 
 from app.utils.logger import get_logger
 from app.utils.send_archive import send_archive
-from app.utils.helpers import path_exists
+from app.utils.helpers import validate_archive_hash
 from app.settings import CONFIG
 
 
 logger = get_logger(__name__)
 
 
-@path_exists('archive_hash')
 async def archive(request):
     archive_hash = request.match_info['archive_hash']
+    validate_archive_hash(archive_hash)
     resp = web.StreamResponse()
     resp.headers['Content-Disposition'] = f'attachment; filename="{archive_hash}.zip"'
     await resp.prepare(request)  # Отправка заголовков
